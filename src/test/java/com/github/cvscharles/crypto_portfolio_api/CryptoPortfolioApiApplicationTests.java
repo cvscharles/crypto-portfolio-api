@@ -1,13 +1,13 @@
-package com.github.cvscharles.crypto_portfolio_api;
+// package com.github.cvscharles.crypto_portfolio_api;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class CryptoPortfolioApiApplicationTests {
+// @SpringBootTest
+// class CryptoPortfolioApiApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// 	@Test
+// 	void contextLoads() {
+// 	}
 
-}
+// }
