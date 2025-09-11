@@ -13,7 +13,7 @@ public class Holding {
     private final LocalDate purchaseDate;
 
     //hard coding first holding of bitcoin
-    public static Holding bitcoinHolding = new Holding("Bitcoin", 10, LocalDate.of(2025, 9, 1));
+    // public static Holding bitcoinHolding = new Holding("Bitcoin", 10, LocalDate.of(2025, 9, 1));
 
 
 }

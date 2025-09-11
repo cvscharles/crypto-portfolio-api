@@ -22,8 +22,8 @@ public class PriceService {
             ParameterizedTypeReference<Map<String, Map<String, Double>>> typeRef =
                     new ParameterizedTypeReference<>() {};
 
-            Map<String, Map<String, Double>> response = webClient.get()
-                    .uri("/simple/price?ids={id}&vs_currencies=gbp", cryptoId)
+            Map<String, Map<String, Double>> response = webClient.get()      
+            .uri("/simple/price?ids={id}&vs_currencies=gbp", cryptoId)
                     .retrieve()
                     .bodyToMono(typeRef)
                     .block();
