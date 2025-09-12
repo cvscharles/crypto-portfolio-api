@@ -1,19 +1,29 @@
 package com.github.cvscharles.crypto_portfolio_api.holding;
 
 import java.time.LocalDate;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.*;
 
+@Entity
+@Table(name = "holdings")
 @Getter
 @Setter
+@NoArgsConstructor
 @AllArgsConstructor
+
 public class Holding {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     
-    private final String name;
+    private Long id;
+    private String name;
     private double quantity;
-    private final LocalDate purchaseDate;
-
-    //hard coding first holding of bitcoin
-    // public static Holding bitcoinHolding = new Holding("Bitcoin", 10, LocalDate.of(2025, 9, 1));
-
+    private LocalDate purchaseDate;    
 
 }

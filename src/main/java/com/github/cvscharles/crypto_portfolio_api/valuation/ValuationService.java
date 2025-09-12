@@ -1,9 +1,7 @@
 package com.github.cvscharles.crypto_portfolio_api.valuation;
 
-import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.springframework.stereotype.Service;
 import com.github.cvscharles.crypto_portfolio_api.prices.PriceService;
 import com.github.cvscharles.crypto_portfolio_api.dto.PortfolioValueResponse;
