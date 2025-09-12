@@ -19,25 +19,25 @@ public class PriceService {
      */
     public double getCurrentPrice(String cryptoId) {
         try {
-            ParameterizedTypeReference<Map<String, Map<String, Double>>> typeRef =
-                    new ParameterizedTypeReference<>() {};
-
-            Map<String, Map<String, Double>> response = webClient.get()      
-            .uri("/simple/price?ids={id}&vs_currencies=gbp", cryptoId)
+            ParameterizedTypeReference<Map<String, Map<String, Double>>> typeRef = new ParameterizedTypeReference<>() {
+            };
+            String cryptoLowerCase = cryptoId.toLowerCase();
+            Map<String, Map<String, Double>> response = webClient.get()
+                    .uri("/simple/price?ids="+cryptoLowerCase+"&vs_currencies=gbp")
+                    .header("x-cg-demo-api-key", "CG-tZJuqzdX3vBzK4Aj2ueEDx7w")
                     .retrieve()
                     .bodyToMono(typeRef)
                     .block();
 
-            if (response == null || !response.containsKey(cryptoId)) {
-                throw new PriceNotFoundException("Current price not found for crypto: " + cryptoId);
+            if (response == null || !response.containsKey(cryptoLowerCase)) {
+                throw new PriceNotFoundException("Current price not found for crypto: " + cryptoLowerCase);
             }
 
-            return response.get(cryptoId).getOrDefault("gbp",
-                    throwAndReturn("Current GBP price missing for crypto: " + cryptoId));
+            return response.get(cryptoLowerCase).get("gbp");
         } catch (Exception e) {
             throw new PriceNotFoundException("Error fetching current price for crypto: " + cryptoId);
         }
-    }       
+    }
 
     private double throwAndReturn(String message) {
         throw new PriceNotFoundException(message);

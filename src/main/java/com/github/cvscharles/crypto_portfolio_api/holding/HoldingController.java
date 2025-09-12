@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.github.cvscharles.crypto_portfolio_api.dto.HoldingRequest;
 import com.github.cvscharles.crypto_portfolio_api.dto.HoldingResponse;
 import com.github.cvscharles.crypto_portfolio_api.dto.PortfolioValueResponse;
+import com.github.cvscharles.crypto_portfolio_api.dto.UpdateHolding;
 import com.github.cvscharles.crypto_portfolio_api.valuation.ValuationService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,7 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import java.util.List;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @RestController
@@ -28,7 +29,7 @@ public class HoldingController {
         this.valuationService = valuationService;
     }
 
-    @GetMapping
+    @GetMapping("/allholdings")
     public List<HoldingResponse> getAllHoldings() {
         return holdingService.getAllHoldings().stream()
                 .map(this::toResponse)
@@ -47,19 +48,20 @@ public class HoldingController {
 
     @PostMapping("/create")
     public String createHolding(@RequestBody HoldingRequest request) {
-        Holding holding = new Holding(request.name(), request.quantity(), request.purchaseDate());
+        Holding holding = new Holding(null, request.name(), request.quantity(), request.purchaseDate());
         holdingService.createHolding(holding);
         return "Holding created successfully";
     }
 
-    @PutMapping("/{name}")
-    public HoldingResponse updateHolding(@PathVariable String name, @RequestParam double quantity) {
-        return toResponse(holdingService.updateHolding(name, quantity));
+    @PostMapping("/updateholding")
+    public HoldingResponse updateHolding(@RequestBody UpdateHolding updateRequest) {
+        return toResponse(holdingService.updateHolding(updateRequest.name(),updateRequest.quantity()));
     }
 
-    @DeleteMapping("/{name}")
-    public void deleteHolding(@PathVariable String name) {
+    @DeleteMapping("/deleteholding")
+    public String deleteHolding(@RequestParam String name) {
         holdingService.deleteHolding(name);
+        return "Holding deleted successfully";
     }
 
     private HoldingResponse toResponse(Holding holding) {
