@@ -38,8 +38,4 @@ public class PriceService {
             throw new PriceNotFoundException("Error fetching current price for crypto: " + cryptoId);
         }
     }
-
-    private double throwAndReturn(String message) {
-        throw new PriceNotFoundException(message);
-    }
 }
