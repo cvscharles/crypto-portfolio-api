@@ -1,169 +1,167 @@
-🚀 Crypto Portfolio API
+# 🚀 Crypto Portfolio API
 
-A Spring Boot REST API for managing cryptocurrency holdings, calculating portfolio value, and retrieving filtered data. Built with Java, Spring Boot, Spring Data JPA, and MySQL, with Swagger/OpenAPI documentation.
+A Spring Boot REST API for managing cryptocurrency holdings, calculating portfolio value, and retrieving filtered data. Built with **Java, Spring Boot, Spring Data JPA**, and **MySQL**, with **Swagger/OpenAPI documentation.**
 
-🗒 Background / User Story
+## 🗒 Background / User Story
 
-As an active cryptocurrency holder, I wanted a simple way to track all my holdings in one place. Previously, I relied on a spreadsheet — manually entering quantities, checking multiple exchanges for the latest prices, and then calculating the total portfolio value by hand.
+As an active cryptocurrency holder, I wanted a simple way to track all my holdings in one place. Previously, I relied on a spreadsheet — **manually** entering quantities, checking **multiple** exchanges for the latest prices, and then calculating the total portfolio value **by hand**.
 
-This process was:
-⏳ Time‑consuming — switching between tabs and apps
-⚠️ Error‑prone — easy to mistype numbers or forget to update prices
-📉 Inefficient — no quick way to see my portfolio’s real‑time value
+This process was: 
+* ⏳ **Time‑consuming** — switching between tabs and apps 
+* ⚠️ **Error‑prone** — easy to mistype numbers or forget to update prices
+* 📉 **Inefficient** — no quick way to see my portfolio’s real‑time value
 
-I created the Crypto Portfolio API to solve this problem through:
-📊 Storing all holdings in a central database
-🔄 Easily calculating total portfolio value
-🔍 Retrieving holdings instantly, with filtering if necessary
-🌐 Accessing everything through a clean, documented REST API
+I created the Crypto Portfolio API to solve this problem through: 
+* 📊 Storing all holdings in a **central database**
+* 🔄 **Easily** calculating total portfolio value 
+* 🔍 Retrieving holdings **instantly**, with **filtering** if necessary 
+* 🌐 Accessing everything through a **clean, documented REST API**
 
-Now, instead of juggling spreadsheets and exchange tabs, I can get my portfolio’s value in a single API call!
+Now, instead of juggling spreadsheets and exchange tabs, I can get my portfolio’s value in a **single** API call!
 
-✨ Features
+---
 
-📊 CRUD operations for holdings (Create, Read, Update, Delete)
-💰 Portfolio valuation using current market prices obtained from CoinGecko's public API
-🔍 Filtered GET endpoint using a Spring Data JPA derived query (findByNameIgnoreCase)
-📜 Swagger UI for interactive API documentation
-🗄 Database dump file for easy setup with sample data
+## ✨ Features
 
-🛠 Tech Stack
+* 📊 **CRUD operations** for holdings (Create, Read, Update, Delete) 
+* 💰 **Portfolio valuation** using current market prices obtained from CoinGecko's public API 
+* 🔍 **Filtered GET endpoint** using a Spring Data JPA derived query
+* 📜 **Swagger UI** for interactive API documentation 
+* 🗄 **Database dump file** for easy setup with sample data
 
-☕ Java 21
-🌱 Spring Boot 3.5.4
-🗃 Spring Data JPA
-🐬 MySQL 8
-📦 Maven
-📖 Springdoc-openapi 2.8.13
+---
 
-🚦 Getting Started
+## 🛠 Tech Stack
 
-1️⃣ Clone the repository
+- ☕ Java 21 
+- 🌱 Spring Boot 3.5.4 
+- 🗃 Spring Data JPA 
+- 🐬 MySQL 8 
+- 📦 Maven 
+- 📖 Springdoc-openapi 2.8.13
 
-git clone https://github.com/your-username/crypto-portfolio-api.git
-cd crypto-portfolio-api
+---
 
-2️⃣ Database setup
+## 🚦 Getting Started
 
-Create a new MySQL database:
+#### 1️⃣ Clone the repository
 
-CREATE DATABASE crypto_portfolio;
-Import the dump file from the project root:
-mysql -u root -p crypto_portfolio < crypto_portfolio_dump.sql
-Update your local src/main/resources/application.properties (not committed to Git) with your DB credentials
+`git clone https://github.com/your-username/crypto-portfolio-api.git`
 
-3️⃣ Run the application
+`cd crypto-portfolio-api`
 
-./mvnw spring-boot:run
+#### 2️⃣ Database setup
 
-The API will start at:
-http://localhost:8082
+- Create a new MySQL database:
 
-📚 API Documentation (Swagger UI)
+`CREATE DATABASE crypto_portfolio;`
+
+- Import the dump file from the project root: 
+
+`mysql -u root -p crypto_portfolio < crypto_portfolio_dump.sql`
+
+- Update your local `src/main/resources/application.properties` **(not committed to Git)** with your DB credentials
+
+#### 3️⃣ Run the application
+
+`./mvnw spring-boot:run`
+
+**The API will start at: http://localhost:8082**
+
+---
+
+## 📚 API Documentation (Swagger UI)
 
 Once the app is running, open:
 
-http://localhost:8082/swagger-ui/index.html
+**http://localhost:8082/swagger-ui/index.html**
 
-From here you can:
-📄 View all endpoints
-📝 See parameter descriptions and example requests/responses
-▶️ Try out API calls directly from the browser
+From here you can: 
+- 📄 View all endpoints 
+- 📝 See parameter descriptions and example requests/responses 
+- ▶️ Try out API calls directly from the browser
 
-🔑 Endpoint Overview
+---
 
-GET	- /api/holdings/allholdings: Shows all holdings
-GET	- /api/holdings/{name}: Gets a holding by name (filtered via JPA query)
-GET	- /api/holdings/portfolio: Gets total portfolio value
-POST - /api/holdings/create: Creates a new holding record
-POST - /api/holdings/updateholding: Updates a holding's quantity
-DELETE - /api/holdings/deleteholding?name=Bitcoin: Deletes a holding by name
+## 🔑 Endpoint Overview
 
-🎯 Filtered GET Endpoint Requirement
+| Method | Endpoint                                         | Description                                           |
+|--------|--------------------------------------------------|-------------------------------------------------------|
+| GET    | `/api/holdings/allholdings`                      | Shows all holdings                                    |
+| GET    | `/api/holdings/{name}`                           | Gets a holding by name (filtered via JPA query)       |
+| GET    | `/api/holdings/portfolio`                        | Gets total portfolio value                            |
+| POST   | `/api/holdings/create`                           | Creates a new holding record                          |
+| POST   | `/api/holdings/updateholding`                    | Updates a holding's quantity                          |
+| DELETE | `/api/holdings/deleteholding?name=Bitcoin`       | Deletes a holding by name                             |
 
-The endpoint:
-GET /api/holdings/{name}
 
-✅ Uses HoldingRepository.findByNameIgnoreCase(String name) (Spring Data JPA derived query)
-✅ Filters results in the database
-✅ Returns a single holding or 404 if not found
+---
 
-📌 Example Requests
+## 📌 Example Requests
 
-➕ Create Holding
+#### ➕ Create Holding
 
-http:
-POST /api/holdings/create
-Content-Type: application/json
+`POST /api/holdings/create` 
 
-{
-  "name": "Bitcoin",
-  "quantity": 1.5,
-  "purchaseDate": "2024-05-10"
-}
+`Content-Type: application/json`
 
-✏️ Update Holding
+```{ "name": "Bitcoin", "quantity": 1.5, "purchaseDate": "2024-05-10" }```
 
-http:
-POST /api/holdings/updateholding
-Content-Type: application/json
+#### ✏️ Update Holding
 
-{
-  "name": "Bitcoin",
-  "quantity": 2.0
-}
+`POST /api/holdings/updateholding `
 
-🗑 Delete Holding
+`Content-Type: application/json`
 
-http:
-DELETE /api/holdings/deleteholding?name=Bitcoin
+`{ "name": "Bitcoin", "quantity": 2.0 }`
 
-🧪 Running Tests
+#### 🗑 Delete Holding
 
-./mvnw test
-At least one unit test (ValuationServiceTest) is included and passes ✅
+`DELETE /api/holdings/deleteholding?name=Bitcoin`
 
-🔒 Security
+---
 
-🛡 application.properties is in .gitignore to protect credentials
+## 🧪 Running Tests
+
+`./mvnw test`
+
+ At least one unit test **(ValuationServiceTest)** is included and passes ✅
+
+ ---
+
+## 🔒 Security
+
+🛡 **application.properties** is in **.gitignore** to protect credentials 
+
 🔑 No secrets are committed to the repository
 
-🔮 Future Improvements & Roadmap
+---
 
-This project is Version 1 — intentionally built to be the most efficient, simple, and functional version possible for the assessment. I focused on delivering a working, clean, and maintainable prototype without unnecessarily over‑complicating the initial build.
+## 🔮 Future Improvements & Roadmap
+
+This project is **Version 1** — intentionally built to be the most efficient, simple, and functional version possible for the assessment. I focused on delivering a working, clean, and maintainable prototype without unnecessarily over‑complicating the initial build.
 
 With more time, I would expand the API with the following enhancements:
 
-💹 Profit & Loss (P/L) Calculation
-Compare the purchase price of each asset (from the purchase date) with its current market price.
-Show both absolute P/L (in currency) and percentage change for each holding.
-Provide a portfolio‑wide P/L summary so users can instantly see overall gains or losses.
+#### 💹 Profit & Loss (P/L): 
+Calculation Compare the purchase price of each asset (from the purchase date) with its current market price. Show both absolute P/L (in currency) and percentage change for each holding. Provide a portfolio‑wide P/L summary so users can instantly see overall gains or losses.
 
-🥧 Portfolio Exposure Analysis
-Calculate the percentage share of each asset relative to the total portfolio value.
-Present this as a breakdown (e.g., BTC = 45%, ETH = 30%, ADA = 25%).
-Enable users to quickly assess diversification and risk concentration.
+#### 🥧 Portfolio Exposure:
+ Analysis Calculate the percentage share of each asset relative to the total portfolio value. Present this as a breakdown *(e.g., BTC = 45%, ETH = 30%, ADA = 25%)*. Enable users to quickly assess diversification and risk concentration.
 
-🛡 More robust data validation
-Enforce stricter input rules (e.g., quantity > 0, valid date formats, asset name constraints).
-Provide clearer, user‑friendly error messages.
+#### 🛡 More robust data validation: 
+Enforce stricter input rules (e.g., quantity > 0, valid date formats, asset name constraints). Provide clearer, user‑friendly error messages.
 
-🧪 Comprehensive testing
-Add more unit tests to cover edge cases.
-Introduce integration tests to verify end‑to‑end behaviour between layers.
+#### 🧪 Comprehensive testing:
+ Add more unit tests to cover edge cases. Introduce integration tests to verify end‑to‑end behaviour between layers.
 
-👥 Multi‑user support
-Implement authentication & authorisation.
-Allow each user to manage their own portfolio securely.
+#### 👥 Multi‑user support:
+ Implement authentication & authorisation. Allow each user to manage their own portfolio securely.
 
-🏦 Asset class inheritance
-Create a base Asset class with shared fields.
-Extend into subclasses like Cryptocurrency, Stock, Bond, etc., enabling a more diverse portfolio.
+#### 🏦 Asset class inheritance:
+ Create a base Asset class with shared fields. Extend into subclasses like *Cryptocurrency, Stock, Bond, etc.*, enabling a more diverse portfolio.
 
-🗄 More robust database design
-Add relational tables for asset types, transactions, and historical prices.
-Optimise queries for performance at scale.
+#### 🗄 More robust database design:
+ Add relational tables for asset types, transactions, and historical prices. Optimise queries for performance at scale.
 
-📈 These improvements would transform the API from a single‑user crypto tracker into a scalable, multi‑asset portfolio management platform.
-
-
+#### 📈 These improvements would transform the API from a single‑user crypto tracker into a scalable, multi‑asset portfolio management platform.
