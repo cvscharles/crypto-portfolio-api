@@ -1,7 +1,6 @@
 package com.github.cvscharles.crypto_portfolio_api.holding;
 
 import java.time.LocalDate;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;

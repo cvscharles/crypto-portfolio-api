@@ -13,12 +13,14 @@ public class ValuationService {
 
     private final PriceService priceService;
     private final HoldingService holdingService;
-
+    
+    //dependency injection within constructor
     public ValuationService(PriceService priceService, HoldingService holdingService) {
         this.priceService = priceService;
         this.holdingService = holdingService;
     }
 
+    //method that calculates the value of all holdings based on quantity and current price and returns result as a dto
     public PortfolioValueResponse calculatePortfolioValue() {
         Map<String, Double> holdingsValue = new HashMap<>();
         double totalValue = 0.0;
